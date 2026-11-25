@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAB 2 – Menyajikan Berita Inovasi yang Menghibur | Bahasa Indonesia Kelas XI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Merriweather untuk nuansa editorial jurnalistik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon Jurnalistik & Media -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Merriweather"', 'serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#1e3a8a',
+                            900: '#0f172a',
+                            950: '#090d16',
+                        },
+                        crimson: {
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                        },
+                        ambernews: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Kustomisasi scrollbar & animasi ringan */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1e3a8a;
+        }
+
+        @keyframes pulse-live {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.15); }
+        }
+        .animate-live {
+            animation: pulse-live 1.5s infinite ease-in-out;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .news-ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 28s linear infinite;
+        }
+        .news-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        .fade-in-section {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-amber-300 selection:text-slate-900">
+
+    <!-- Notifikasi Toast Pengganti Alert -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+    <!-- Top Breaking News Bar -->
+    <div class="bg-navy-950 text-white text-xs sm:text-sm py-2 px-4 border-b border-slate-800 flex items-center overflow-hidden">
+        <div class="flex items-center gap-2 bg-crimson-600 text-white font-bold px-2.5 py-0.5 rounded-md shrink-0 uppercase tracking-wider text-[11px] sm:text-xs shadow-sm z-10">
+            <span class="w-2 h-2 rounded-full bg-white animate-live"></span>
+            <span>E-MODUL INTERAKTIF</span>
+        </div>
+        <div class="overflow-hidden w-full ml-3">
+            <div class="news-ticker text-slate-300 font-medium">
+                Selamat datang di Portal Pembelajaran Bahasa Indonesia Kelas XI SMA • Bab 2: Menyajikan Berita Inovasi yang Menghibur • Kuasai Fakta vs Opini, Unsur 5W+1H, Struktur Piramida Terbalik, hingga Produksi Vlog Berita Kreatif!
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Utama & Progress Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand / Logo Portal Berita -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('cover')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-navy-800 to-blue-600 text-white flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-newspaper text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="font-extrabold text-navy-900 tracking-tight text-base sm:text-lg">JURNAL<span class="text-crimson-600">XI</span></span>
+                            <span class="hidden sm:inline-block text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full border border-amber-300">KURIKULUM MERDEKA</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 font-medium hidden sm:block">Bahasa Indonesia SMA Kelas XI • Bab 2</p>
+                    </div>
+                </div>
+
+                <!-- Progress Belajar Indikator -->
+                <div class="flex items-center gap-4">
+                    <div class="hidden md:flex flex-col items-end w-48">
+                        <div class="flex justify-between w-full text-xs font-semibold mb-1">
+                            <span class="text-slate-600">Progres Belajar</span>
+                            <span id="progress-text" class="text-navy-800 font-bold">0% (0/6 Bab)</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="h-full bg-gradient-to-r from-navy-800 via-blue-600 to-amber-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Daftar Isi Mobile & Desktop -->
+                    <button onclick="toggleSidebar()" class="flex items-center gap-2 bg-navy-900 hover:bg-navy-800 text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                        <i class="fa-solid fa-list-ul"></i>
+                        <span>Daftar Isi</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Progress Bar Tipis -->
+        <div class="md:hidden w-full h-1.5 bg-slate-200">
+            <div id="progress-bar-mobile" class="h-full bg-crimson-600 transition-all duration-500" style="width: 0%"></div>
+        </div>
+    </header>
+
+    <!-- Layout Utama: Sidebar Daftar Isi + Konten E-Book -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 flex flex-col lg:flex-row gap-8 relative">
+        
+        <!-- Overlay Mobile Sidebar -->
+        <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+
+        <!-- Sidebar Navigasi / Daftar Isi Interaktif -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-80 bg-white lg:bg-transparent lg:static lg:w-72 xl:w-80 shrink-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out overflow-y-auto lg:overflow-visible p-5 lg:p-0 shadow-2xl lg:shadow-none">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sticky top-24">
+                <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-crimson-600">Navigasi E-Book</span>
+                        <h2 class="font-bold text-navy-900 text-base">Daftar Isi Bab 2</h2>
+                    </div>
+                    <button onclick="toggleSidebar()" class="lg:hidden w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Menu Item Navigasi -->
+                <nav class="space-y-1.5" id="toc-nav">
+                    <button onclick="navigateTo('cover')" data-target="cover" class="toc-btn w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-3 transition bg-navy-900 text-white">
+                        <i class="fa-solid fa-book-open w-4 text-center text-amber-400"></i>
+                        <span class="truncate">Sampul & Pengantar Bab</span>
+                    </button>
+
+                    <button onclick="navigateTo('sub1')" data-target="sub1" class="toc-btn w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 flex items-center justify-between gap-2 transition">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <span class="w-6 h-6 rounded-lg bg-blue-100 text-navy-800 font-bold text-xs flex items-center justify-center shrink-0">1</span>
+                            <span class="truncate">Informasi Aktual & Akurat</span>
+                        </div>
+                        <i id="check-sub1" class="fa-regular fa-circle text-slate-300 text-xs shrink-0"></i>
+                    </button>
+
+                    <button onclick="navigateTo('sub2')" data-target="sub2" class="toc-btn w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 flex items-center justify-between gap-2 transition">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <span class="w-6 h-6 rounded-lg bg-blue-100 text-navy-800 font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                            <span class="truncate">Struktur & Kebahasaan</span>
+                        </div>
+                        <i id="check-sub2" class="fa-regular fa-circle text-slate-300 text-xs shrink-0"></i>
+                    </button>
+
+                    <button onclick="navigateTo('sub3')" data-target="sub3" class="toc-btn w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 flex items-center justify-between gap-2 transition">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <span class="w-6 h-6 rounded-lg bg-blue-100 text-navy-800 font-bold text-xs flex items-center justify-center shrink-0">3</span>
+                            <span class="truncate">Penyajian Vlog Berita</span>
+                        </div>
+                        <i id="check-sub3" class="fa-regular fa-circle text-slate-300 text-xs shrink-0"></i>
+                    </button>
+
+                    <button onclick="navigateTo('sub4')" data-target="sub4" class="toc-btn w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 flex items-center justify-between gap-2 transition">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <span class="w-6 h-6 rounded-lg bg-blue-100 text-navy-800 font-bold text-xs flex items-center justify-center shrink-0">4</span>
+                            <span class="truncate">Proyek Membuat Vlog</span>
+                        </div>
+                        <i id="check-sub4" class="fa-regular fa-circle text-slate-300 text-xs shrink-0"></i>
+                    </button>
+
+                    <button onclick="navigateTo('sub5')" data-target="sub5" class="toc-btn w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 flex items-center justify-between gap-2 transition">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <span class="w-6 h-6 rounded-lg bg-blue-100 text-navy-800 font-bold text-xs flex items-center justify-center shrink-0">5</span>
+                            <span class="truncate">Jurnal Membaca Inovasi</span>
+                        </div>
+                        <i id="check-sub5" class="fa-regular fa-circle text-slate-300 text-xs shrink-0"></i>
+                    </button>
+
+                    <button onclick="navigateTo('sub6')" data-target="sub6" class="toc-btn w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 flex items-center justify-between gap-2 transition">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <span class="w-6 h-6 rounded-lg bg-blue-100 text-navy-800 font-bold text-xs flex items-center justify-center shrink-0">6</span>
+                            <span class="truncate">Refleksi & Kuis Evaluasi</span>
+                        </div>
+                        <i id="check-sub6" class="fa-regular fa-circle text-slate-300 text-xs shrink-0"></i>
+                    </button>
+                </nav>
+
+                <!-- Kartu Tips Belajar Mandiri -->
+                <div class="mt-6 p-4 rounded-xl bg-gradient-to-br from-navy-900 to-navy-800 text-white">
+                    <div class="flex items-center gap-2 text-amber-400 font-bold text-xs mb-1.5">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>TIPS BELAJAR MANDIRI</span>
+                    </div>
+                    <p class="text-xs text-slate-200 leading-relaxed">
+                        Klik tombol <strong>"Tandai Selesai"</strong> di akhir setiap subbab untuk mencatat progres belajarmu dan membuka lencana jurnalis muda!
+                    </p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Area Konten Utama -->
+        <main class="flex-1 min-w-0">
+
+            <!-- ===================================================================== -->
+            <!-- HALAMAN SAMPUL (COVER MAJALAH DIGITAL) -->
+            <!-- ===================================================================== -->
+            <section id="section-cover" class="content-section fade-in-section">
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+                    <!-- Hero Cover Majalah -->
+                    <div class="relative bg-gradient-to-br from-navy-950 via-navy-900 to-blue-900 text-white p-6 sm:p-10 lg:p-12 overflow-hidden">
+                        <!-- Dekorasi Grid Latar Belakang -->
+                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+                        <div class="absolute -right-16 -top-16 w-72 h-72 bg-crimson-600/20 rounded-full blur-3xl"></div>
+                        <div class="absolute -left-16 -bottom-16 w-72 h-72 bg-amber-400/20 rounded-full blur-3xl"></div>
+
+                        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-7 space-y-5">
+                                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-bold tracking-wider uppercase">
+                                    <i class="fa-solid fa-bolt"></i>
+                                    <span>Bahasa Indonesia SMA/MA Kelas XI</span>
+                                </div>
+
+                                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                                    BAB 2: <br>
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-amber-300">
+                                        Menyajikan Berita Inovasi yang Menghibur
+                                    </span>
+                                </h1>
+
+                                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                                    Jadilah jurnalis muda yang cerdas, kritis, dan kreatif! Pelajari cara menyaring informasi aktual di era banjir digital, membedah struktur teks berita, hingga memproduksi vlog berita inovasi yang edukatif sekaligus menghibur.
+                                </p>
+
+                                <div class="flex flex-wrap gap-3 pt-2">
+                                    <button onclick="navigateTo('sub1')" class="bg-crimson-600 hover:bg-crimson-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-crimson-600/30 flex items-center gap-2.5 transition transform hover:-translate-y-0.5">
+                                        <span>Mulai Belajar Bab 2</span>
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                    <button onclick="navigateTo('sub6')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 font-semibold px-5 py-3.5 rounded-xl flex items-center gap-2 transition">
+                                        <i class="fa-solid fa-gamepad text-amber-400"></i>
+                                        <span>Langsung ke Kuis</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Ilustrasi SVG Jurnalistik Digital Modern -->
+                            <div class="lg:col-span-5 flex justify-center">
+                                <div class="w-full max-w-sm bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 shadow-2xl">
+                                    <svg viewBox="0 0 360 280" class="w-full h-auto drop-shadow-md" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Layar Tablet/Portal Berita -->
+                                        <rect x="20" y="15" width="320" height="220" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+                                        <!-- Header Portal -->
+                                        <rect x="20" y="15" width="320" height="36" rx="16" fill="#1e3a8a"/>
+                                        <rect x="20" y="38" width="320" height="13" fill="#1e3a8a"/>
+                                        <circle cx="42" cy="33" r="5" fill="#ef4444"/>
+                                        <circle cx="58" cy="33" r="5" fill="#fbbf24"/>
+                                        <circle cx="74" cy="33" r="5" fill="#22c55e"/>
+                                        <rect x="110" y="27" width="140" height="12" rx="6" fill="#3b82f6"/>
+                                        
+                                        <!-- Konten Berita Utama -->
+                                        <rect x="38" y="66" width="160" height="95" rx="10" fill="#dbeafe"/>
+                                        <!-- Ikon Kamera/Vlog di dalam layar -->
+                                        <circle cx="118" cy="113" r="24" fill="#dc2626"/>
+                                        <polygon points="112,103 112,123 130,113" fill="#ffffff"/>
+                                        <rect x="46" y="74" width="44" height="14" rx="4" fill="#dc2626"/>
+                                        <text x="53" y="84" fill="#ffffff" font-size="8" font-weight="bold" font-family="sans-serif">LIVE VLOG</text>
+
+                                        <!-- Baris Teks Berita -->
+                                        <rect x="210" y="68" width="110" height="12" rx="4" fill="#0f172a"/>
+                                        <rect x="210" y="88" width="95" height="8" rx="4" fill="#64748b"/>
+                                        <rect x="210" y="102" width="105" height="8" rx="4" fill="#64748b"/>
+                                        <rect x="210" y="116" width="80" height="8" rx="4" fill="#64748b"/>
+                                        <rect x="210" y="138" width="65" height="20" rx="6" fill="#f59e0b"/>
+
+                                        <!-- Kartu 5W+1H Bawah -->
+                                        <rect x="38" y="174" width="88" height="44" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+                                        <text x="56" y="200" fill="#1e3a8a" font-size="13" font-weight="bold" font-family="sans-serif">5W + 1H</text>
+                                        
+                                        <rect x="136" y="174" width="88" height="44" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+                                        <text x="157" y="200" fill="#b91c1c" font-size="13" font-weight="bold" font-family="sans-serif">FAKTA</text>
+
+                                        <rect x="234" y="174" width="86" height="44" rx="8" fill="#fffbeb" stroke="#fcd34d"/>
+                                        <text x="250" y="200" fill="#b45309" font-size="13" font-weight="bold" font-family="sans-serif">INOVASI</text>
+
+                                        <!-- Badge Lencana -->
+                                        <rect x="95" y="246" width="170" height="24" rx="12" fill="#fbbf24"/>
+                                        <text x="116" y="262" fill="#0f172a" font-size="10" font-weight="bold" font-family="sans-serif">JURNALISTIK DIGITAL SMA</text>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Peta Konsep / Tujuan Pembelajaran -->
+                    <div class="p-6 sm:p-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-crimson-600">Peta Perjalanan Belajar</span>
+                                <h2 class="text-xl sm:text-2xl font-extrabold text-navy-900">Apa yang Akan Kamu Pelajari?</h2>
+                            </div>
+                            <span class="text-xs font-medium bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg self-start">
+                                <i class="fa-regular fa-clock mr-1 text-navy-800"></i> Estimasi Belajar Mandiri: 4–6 JP
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Card 1 -->
+                            <div onclick="navigateTo('sub1')" class="group cursor-pointer p-5 rounded-2xl border border-slate-200 hover:border-navy-800 bg-slate-50/50 hover:bg-blue-50/40 transition">
+                                <div class="w-10 h-10 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center font-bold mb-3 group-hover:scale-110 transition">1</div>
+                                <h3 class="font-bold text-navy-900 mb-1.5 group-hover:text-blue-700">Informasi Aktual & Akurat</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">Membedakan fakta vs opini, menganalisis 5W+1H, dan cek fakta berita inovasi.</p>
+                            </div>
+                            <!-- Card 2 -->
+                            <div onclick="navigateTo('sub2')" class="group cursor-pointer p-5 rounded-2xl border border-slate-200 hover:border-navy-800 bg-slate-50/50 hover:bg-blue-50/40 transition">
+                                <div class="w-10 h-10 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center font-bold mb-3 group-hover:scale-110 transition">2</div>
+                                <h3 class="font-bold text-navy-900 mb-1.5 group-hover:text-blue-700">Struktur & Kebahasaan</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">Infografis piramida terbalik (judul, teras, tubuh, ekor) serta kalimat langsung & tak langsung.</p>
+                            </div>
+                            <!-- Card 3 -->
+                            <div onclick="navigateTo('sub3')" class="group cursor-pointer p-5 rounded-2xl border border-slate-200 hover:border-navy-800 bg-slate-50/50 hover:bg-blue-50/40 transition">
+                                <div class="w-10 h-10 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center font-bold mb-3 group-hover:scale-110 transition">3</div>
+                                <h3 class="font-bold text-navy-900 mb-1.5 group-hover:text-blue-700">Penyajian Vlog Berita</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">Teknik olah vokal, gestur presenter, pengambilan gambar, dan contoh skenario vlog.</p>
+                            </div>
+                            <!-- Card 4 -->
+                            <div onclick="navigateTo('sub4')" class="group cursor-pointer p-5 rounded-2xl border border-slate-200 hover:border-navy-800 bg-slate-50/50 hover:bg-blue-50/40 transition">
+                                <div class="w-10 h-10 rounded-xl bg-crimson-600 text-white flex items-center justify-center font-bold mb-3 group-hover:scale-110 transition">4</div>
+                                <h3 class="font-bold text-navy-900 mb-1.5 group-hover:text-crimson-600">Proyek Membuat Vlog</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">Panduan 8 tahap produksi, contoh storyboard, checklist, dan rubrik penilaian lengkap.</p>
+                            </div>
+                            <!-- Card 5 -->
+                            <div onclick="navigateTo('sub5')" class="group cursor-pointer p-5 rounded-2xl border border-slate-200 hover:border-navy-800 bg-slate-50/50 hover:bg-blue-50/40 transition">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500 text-navy-950 flex items-center justify-center font-bold mb-3 group-hover:scale-110 transition">5</div>
+                                <h3 class="font-bold text-navy-900 mb-1.5 group-hover:text-amber-700">Jurnal Membaca</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">Lembar kerja digital interaktif untuk mencatat hasil eksplorasi berita inovasi.</p>
+                            </div>
+                            <!-- Card 6 -->
+                            <div onclick="navigateTo('sub6')" class="group cursor-pointer p-5 rounded-2xl border border-slate-200 hover:border-navy-800 bg-slate-50/50 hover:bg-blue-50/40 transition">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold mb-3 group-hover:scale-110 transition">6</div>
+                                <h3 class="font-bold text-navy-900 mb-1.5 group-hover:text-emerald-700">Refleksi & Kuis Akhir</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">Evaluasi diri dan uji pemahaman lewat kuis pilihan ganda berumpan balik otomatis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- SUBBAB 1: MENEMUKAN INFORMASI AKTUAL DAN AKURAT PADA TEKS BERITA -->
+            <!-- ===================================================================== -->
+            <section id="section-sub1" class="content-section hidden fade-in-section space-y-6">
+                <!-- Header Subbab -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="px-3 py-1 rounded-full bg-blue-100 text-navy-800 text-xs font-extrabold uppercase tracking-wider">Bagian 1 dari 6</span>
+                        <span class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-magnifying-glass mr-1"></i> Literasi Informasi</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-3">1. Menemukan Informasi Aktual dan Akurat pada Teks Berita</h1>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        Setiap hari kita dibanjiri ribuan informasi di media sosial dan portal daring. Namun, tidak semua informasi layak disebut berita yang bermutu. Mari pelajari standar jurnalistik untuk membedakan berita berkualitas dari sekadar rumor!
+                    </p>
+                </div>
+
+                <!-- 1.1 Pengertian & Karakteristik -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-navy-900 text-white text-sm flex items-center justify-center">A</span>
+                        Pengertian & Karakteristik Berita Aktual dan Akurat
+                    </h2>
+
+                    <!-- Kotak Istilah Penting -->
+                    <div class="bg-blue-50/80 border-l-4 border-navy-800 rounded-r-2xl p-5">
+                        <div class="flex items-center gap-2 text-navy-900 font-bold text-sm mb-1">
+                            <i class="fa-solid fa-bookmark text-crimson-600"></i>
+                            <span>DEFINISI TEKS BERITA</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            <strong>Teks berita</strong> adalah teks yang melaporkan kejadian, peristiwa, atau informasi terbaru mengenai suatu hal yang telah atau sedang terjadi, disampaikan secara objektif, faktual, dan dapat dipertanggungjawabkan kepada publik melalui media cetak maupun digital.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="flex items-center gap-2.5 text-navy-800 font-bold mb-2">
+                                <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <span>1. Bersifat Aktual (Terbaru)</span>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Berita mengangkat peristiwa yang baru saja terjadi, sedang hangat dibicarakan masyarakat, atau memiliki kebaruan nilai (novelty), seperti temuan teknologi mutakhir karya pelajar.
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="flex items-center gap-2.5 text-navy-800 font-bold mb-2">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <span>2. Bersifat Akurat (Tepat & Teruji)</span>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Seluruh data, angka, nama narasumber, lokasi, dan kronologi peristiwa sesuai dengan kenyataan di lapangan tanpa dilebih-lebihkan atau dikurangi (bebas hoaks).
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Perbedaan Fakta dan Opini -->
+                    <h3 class="text-lg font-bold text-navy-900 pt-2">Perbedaan Informasi Fakta dan Opini</h3>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-navy-900 text-white">
+                                    <th class="p-3.5 font-bold">Aspek Pembeda</th>
+                                    <th class="p-3.5 font-bold text-amber-300">Informasi Fakta</th>
+                                    <th class="p-3.5 font-bold text-rose-300">Informasi Opini</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white">
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-slate-800">Sifat Kebenaran</td>
+                                    <td class="p-3.5 text-slate-600">Objektif, berlaku umum, dan dapat dibuktikan kebenarannya.</td>
+                                    <td class="p-3.5 text-slate-600">Subjektif, bergantung pada sudut pandang pribadi atau kelompok.</td>
+                                </tr>
+                                <tr class="bg-slate-50/70">
+                                    <td class="p-3.5 font-semibold text-slate-800">Data Pendukung</td>
+                                    <td class="p-3.5 text-slate-600">Memuat angka pasti, tanggal, tempat, dan bukti empiris.</td>
+                                    <td class="p-3.5 text-slate-600">Berupa saran, harapan, penilaian, atau prediksi masa depan.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-slate-800">Penanda Kata</td>
+                                    <td class="p-3.5 text-slate-600"><em>Tercatat, berdasarkan data, terbukti, pada pukul...</em></td>
+                                    <td class="p-3.5 text-slate-600"><em>Menurut saya, sebaiknya, diprediksi, sangat luar biasa...</em></td>
+                                </tr>
+                                <tr class="bg-slate-50/70">
+                                    <td class="p-3.5 font-semibold text-slate-800">Contoh Kalimat</td>
+                                    <td class="p-3.5 text-slate-700">"Tim robotik SMAN 1 meraih medali emas pada 12 Oktober 2025."</td>
+                                    <td class="p-3.5 text-slate-700">"Inovasi robot pemilah sampah ini sangat keren dan pasti laris."</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 1.2 Unsur 5W+1H & Cara Cek Kebenaran -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-navy-900 text-white text-sm flex items-center justify-center">B</span>
+                        Unsur Berita (5W + 1H / ADIKSIMBA)
+                    </h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                        <div class="p-4 rounded-2xl border border-blue-200 bg-blue-50/50">
+                            <span class="text-xs font-extrabold text-navy-800 bg-blue-200/70 px-2.5 py-0.5 rounded-md">WHAT (Apa)</span>
+                            <p class="text-sm text-slate-700 mt-2 font-medium">Peristiwa atau inovasi apa yang terjadi dan diberitakan?</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-red-200 bg-red-50/50">
+                            <span class="text-xs font-extrabold text-crimson-700 bg-red-200/70 px-2.5 py-0.5 rounded-md">WHO (Siapa)</span>
+                            <p class="text-sm text-slate-700 mt-2 font-medium">Siapa tokoh, penemu, atau pihak yang terlibat dalam peristiwa?</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-amber-200 bg-amber-50/50">
+                            <span class="text-xs font-extrabold text-amber-800 bg-amber-200/70 px-2.5 py-0.5 rounded-md">WHEN (Kapan)</span>
+                            <p class="text-sm text-slate-700 mt-2 font-medium">Kapan waktu terjadinya peristiwa atau peluncuran inovasi?</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-emerald-200 bg-emerald-50/50">
+                            <span class="text-xs font-extrabold text-emerald-800 bg-emerald-200/70 px-2.5 py-0.5 rounded-md">WHERE (Di mana)</span>
+                            <p class="text-sm text-slate-700 mt-2 font-medium">Di mana lokasi peristiwa atau pengujian inovasi berlangsung?</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-purple-200 bg-purple-50/50">
+                            <span class="text-xs font-extrabold text-purple-800 bg-purple-200/70 px-2.5 py-0.5 rounded-md">WHY (Mengapa)</span>
+                            <p class="text-sm text-slate-700 mt-2 font-medium">Mengapa inovasi tersebut dibuat atau peristiwa itu terjadi?</p>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-cyan-200 bg-cyan-50/50">
+                            <span class="text-xs font-extrabold text-cyan-800 bg-cyan-200/70 px-2.5 py-0.5 rounded-md">HOW (Bagaimana)</span>
+                            <p class="text-sm text-slate-700 mt-2 font-medium">Bagaimana cara kerja inovasi atau proses berlangsungnya peristiwa?</p>
+                        </div>
+                    </div>
+
+                    <!-- Cara Menemukan Informasi & Cek Kebenaran -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+                        <div class="p-5 rounded-2xl bg-slate-900 text-white">
+                            <h4 class="font-bold text-amber-400 text-sm mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-compass"></i>
+                                <span>Cara Menemukan Informasi Penting</span>
+                            </h4>
+                            <ol class="text-xs sm:text-sm text-slate-300 space-y-2 list-decimal list-inside">
+                                <li>Baca judul dan paragraf pertama (teras berita) dengan saksama.</li>
+                                <li>Tandai kata kunci yang merujuk pada nama, angka, waktu, dan lokasi.</li>
+                                <li>Ajukan pertanyaan panduan berbasis rumus <strong>ADIKSIMBA</strong>.</li>
+                                <li>Pisahkan pernyataan fakta dari komentar subjektif narasumber.</li>
+                            </ol>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-crimson-50 border border-crimson-200">
+                            <h4 class="font-bold text-crimson-700 text-sm mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>4 Langkah Cek Kebenaran & Keakuratan</span>
+                            </h4>
+                            <ul class="text-xs sm:text-sm text-slate-700 space-y-2">
+                                <li><i class="fa-solid fa-check text-crimson-600 mr-1.5"></i><strong>Cek Kredibilitas Media:</strong> Pastikan berasal dari portal berita terverifikasi Dewan Pers.</li>
+                                <li><i class="fa-solid fa-check text-crimson-600 mr-1.5"></i><strong>Periksa Tanggal Terbit:</strong> Waspadai berita lama yang didaur ulang seolah baru.</li>
+                                <li><i class="fa-solid fa-check text-crimson-600 mr-1.5"></i><strong>Bandingkan Sumber (Cross-check):</strong> Cari berita serupa di minimal 2 media tepercaya lainnya.</li>
+                                <li><i class="fa-solid fa-check text-crimson-600 mr-1.5"></i><strong>Verifikasi Bukti Visual:</strong> Pastikan foto/video tidak dimanipulasi AI atau diambil dari konteks lain.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1.3 Contoh Teks Berita Inovasi + Latihan Interaktif 5W+1H -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-crimson-600 text-white text-sm flex items-center justify-center">C</span>
+                            Contoh Teks Berita Inovasi & Analisis 5W+1H
+                        </h2>
+                        <span class="text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">STUDI KASUS</span>
+                    </div>
+
+                    <!-- Artikel Berita Bergaya Koran/Portal -->
+                    <article class="p-5 sm:p-7 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                        <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                            <span class="bg-navy-800 text-white font-bold px-2.5 py-0.5 rounded">TEKNOLOGI & PELAJAR</span>
+                            <span>•</span>
+                            <span>Balikpapan, 14 November 2025</span>
+                            <span>•</span>
+                            <span>Oleh: Redaksi JurnalXI</span>
+                        </div>
+
+                        <h3 class="font-serif text-xl sm:text-2xl font-bold text-navy-950 leading-snug">
+                            Keren! Siswa SMA di Balikpapan Ciptakan "Smart-Bin", Tempat Sampah Pintar Pemilah Logam dan Plastik Otomatis
+                        </h3>
+
+                        <div class="font-serif text-sm sm:text-base text-slate-700 space-y-3 leading-relaxed">
+                            <p>
+                                <strong>BALIKPAPAN</strong> — Tiga siswa kelas XI SMAN 5 Balikpapan berhasil menciptakan prototipe tempat sampah pintar bernama <em>Smart-Bin EcoSort</em> pada Kamis (13/11/2025) di Laboratorium Rekayasa Sekolah. Inovasi berbasis mikrokontroler ini mampu memilah sampah botol plastik dan kaleng logam secara otomatis dalam waktu kurang dari tiga detik.
+                            </p>
+                            <p>
+                                Ketua tim inovator, Naufal Pratama, menjelaskan bahwa ide tersebut berawal dari keprihatinan melihat tumpukan sampah di kantin sekolah yang sering tercampur sehingga sulit didaur ulang. Bersama dua rekannya, Kirana Putri dan Dimas Aditya, mereka merancang alat ini selama dua bulan dengan memanfaatkan sensor induktif dan sensor kapasitif.
+                            </p>
+                            <p>
+                                "Cara kerjanya cukup sederhana. Ketika siswa memasukkan sampah ke lubang utama, sensor akan mendeteksi jenis materialnya. Servo motor kemudian menggerakkan katup pemilah ke kompartemen plastik atau logam, sekaligus memberikan poin digital lewat pemindaian kode QR di layar kecilnya," ujar Naufal saat diwawancarai tim liputan.
+                            </p>
+                            <p>
+                                Pihak sekolah mengapresiasi temuan tersebut dan berencana memproduksi lima unit tambahan untuk ditempatkan di area kantin serta taman sekolah pada awal semester depan.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Tabel Analisis 5W+1H -->
+                    <div>
+                        <h4 class="font-bold text-navy-900 text-base mb-3">Bedah Analisis Unsur 5W + 1H dari Berita di Atas:</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                            <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-100">
+                                <strong class="text-navy-900 block mb-1">1. Apa (What):</strong>
+                                <span class="text-slate-700">Penciptaan prototipe tempat sampah pintar otomatis pemilah plastik dan logam bernama <em>Smart-Bin EcoSort</em>.</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-100">
+                                <strong class="text-navy-900 block mb-1">2. Siapa (Who):</strong>
+                                <span class="text-slate-700">Tiga siswa kelas XI SMAN 5 Balikpapan (Naufal Pratama, Kirana Putri, dan Dimas Aditya).</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-100">
+                                <strong class="text-navy-900 block mb-1">3. Kapan (When):</strong>
+                                <span class="text-slate-700">Kamis, 13 November 2025 (setelah proses perancangan selama dua bulan).</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-100">
+                                <strong class="text-navy-900 block mb-1">4. Di mana (Where):</strong>
+                                <span class="text-slate-700">Laboratorium Rekayasa SMAN 5 Balikpapan.</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-100">
+                                <strong class="text-navy-900 block mb-1">5. Mengapa (Why):</strong>
+                                <span class="text-slate-700">Karena keprihatinan melihat sampah di kantin sekolah yang tercampur sehingga menyulitkan proses daur ulang.</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-100">
+                                <strong class="text-navy-900 block mb-1">6. Bagaimana (How):</strong>
+                                <span class="text-slate-700">Sensor induktif dan kapasitif mendeteksi jenis material sampah, lalu motor servo menggerakkan katup ke kompartemen yang sesuai dalam waktu < 3 detik.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AKTIVITAS INTERAKTIF 1: IDENTIFIKASI 5W+1H -->
+                    <div class="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-navy-900 to-navy-800 text-white space-y-4">
+                        <div class="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                            <span>Latihan Interaktif 1: Identifikasi Unsur 5W+1H</span>
+                        </div>
+                        <p class="text-sm text-slate-200">
+                            Bacalah potongan kalimat berita di bawah ini, lalu pilih unsur <strong>5W+1H</strong> yang paling tepat!
+                        </p>
+
+                        <div id="quiz-5w1h-container" class="space-y-3">
+                            <!-- Item 1 -->
+                            <div class="bg-white/10 p-4 rounded-xl border border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <p class="text-xs sm:text-sm text-white font-medium">
+                                    1. "Alat pengering sepatu bertenaga surya ini dirancang <strong>agar pelajar tidak memakai sepatu basah saat musim hujan</strong>."
+                                </p>
+                                <select onchange="check5W1H(this, 'Why', 'fb-5w1')" class="bg-navy-950 text-white text-xs font-semibold px-3 py-2 rounded-lg border border-slate-600 focus:border-amber-400 outline-none shrink-0">
+                                    <option value="">-- Pilih Unsur --</option>
+                                    <option value="What">What (Apa)</option>
+                                    <option value="Who">Who (Siapa)</option>
+                                    <option value="When">When (Kapan)</option>
+                                    <option value="Where">Where (Di mana)</option>
+                                    <option value="Why">Why (Mengapa)</option>
+                                    <option value="How">How (Bagaimana)</option>
+                                </select>
+                            </div>
+                            <div id="fb-5w1" class="text-xs font-semibold hidden px-2"></div>
+
+                            <!-- Item 2 -->
+                            <div class="bg-white/10 p-4 rounded-xl border border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <p class="text-xs sm:text-sm text-white font-medium">
+                                    2. "Panel surya mini menyerap panas matahari, lalu <strong>mengalirkan udara hangat 45°C ke dalam rak sepatu</strong>."
+                                </p>
+                                <select onchange="check5W1H(this, 'How', 'fb-5w2')" class="bg-navy-950 text-white text-xs font-semibold px-3 py-2 rounded-lg border border-slate-600 focus:border-amber-400 outline-none shrink-0">
+                                    <option value="">-- Pilih Unsur --</option>
+                                    <option value="What">What (Apa)</option>
+                                    <option value="Who">Who (Siapa)</option>
+                                    <option value="When">When (Kapan)</option>
+                                    <option value="Where">Where (Di mana)</option>
+                                    <option value="Why">Why (Mengapa)</option>
+                                    <option value="How">How (Bagaimana)</option>
+                                </select>
+                            </div>
+                            <div id="fb-5w2" class="text-xs font-semibold hidden px-2"></div>
+
+                            <!-- Item 3 -->
+                            <div class="bg-white/10 p-4 rounded-xl border border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <p class="text-xs sm:text-sm text-white font-medium">
+                                    3. "Pameran inovasi sains pelajar tingkat nasional resmi dibuka <strong>di Gedung Convention Hall Samarinda</strong>."
+                                </p>
+                                <select onchange="check5W1H(this, 'Where', 'fb-5w3')" class="bg-navy-950 text-white text-xs font-semibold px-3 py-2 rounded-lg border border-slate-600 focus:border-amber-400 outline-none shrink-0">
+                                    <option value="">-- Pilih Unsur --</option>
+                                    <option value="What">What (Apa)</option>
+                                    <option value="Who">Who (Siapa)</option>
+                                    <option value="When">When (Kapan)</option>
+                                    <option value="Where">Where (Di mana)</option>
+                                    <option value="Why">Why (Mengapa)</option>
+                                    <option value="How">How (Bagaimana)</option>
+                                </select>
+                            </div>
+                            <div id="fb-5w3" class="text-xs font-semibold hidden px-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Ringkasan & Navigasi Subbab 1 -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                        <h4 class="font-bold text-amber-900 text-sm mb-1.5"><i class="fa-solid fa-star mr-1.5"></i>Ringkasan Subbab 1</h4>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed">
+                            Berita yang baik wajib bersifat <strong>aktual</strong> (terkini) dan <strong>akurat</strong> (berbasis fakta objektif, bukan opini). Untuk membedah isi pokok berita secara cepat, gunakan rumus <strong>5W+1H (ADIKSIMBA)</strong> dan selalu lakukan verifikasi silang sumber berita.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                        <button onclick="navigateTo('cover')" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-arrow-left"></i> Sampul
+                        </button>
+                        <button onclick="markComplete('sub1', 'sub2')" class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-bold flex items-center gap-2 shadow-md transition">
+                            <span>Tandai Selesai & Lanjut</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- SUBBAB 2: MENGENALI STRUKTUR DAN UNSUR KEBAHASAAN TEKS BERITA -->
+            <!-- ===================================================================== -->
+            <section id="section-sub2" class="content-section hidden fade-in-section space-y-6">
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="px-3 py-1 rounded-full bg-blue-100 text-navy-800 text-xs font-extrabold uppercase tracking-wider">Bagian 2 dari 6</span>
+                        <span class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-layer-group mr-1"></i> Anatomi Teks</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-3">2. Mengenali Struktur dan Unsur Kebahasaan Teks Berita</h1>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        Mengapa berita selalu menaruh inti peristiwa di bagian paling awal? Dalam dunia jurnalistik, pola ini disebut <strong>Piramida Terbalik</strong> agar pembaca langsung menangkap informasi utama meskipun hanya memiliki waktu baca singkat.
+                    </p>
+                </div>
+
+                <!-- Infografis Piramida Terbalik Interaktif -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-navy-900 text-white text-sm flex items-center justify-center">A</span>
+                        Infografis Struktur Teks Berita (Piramida Terbalik)
+                    </h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                        <!-- Visual Piramida SVG -->
+                        <div class="lg:col-span-5 flex flex-col items-center bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                            <svg viewBox="0 0 320 270" class="w-full max-w-xs h-auto">
+                                <!-- 1. Judul (Headline) -->
+                                <polygon points="10,10 310,10 290,55 30,55" fill="#0f172a"/>
+                                <text x="160" y="37" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="bold" font-family="sans-serif">1. JUDUL (HEADLINE)</text>
+
+                                <!-- 2. Teras Berita (Lead) -->
+                                <polygon points="34,62 286,62 252,125 68,125" fill="#dc2626"/>
+                                <text x="160" y="92" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="bold" font-family="sans-serif">2. TERAS BERITA (LEAD)</text>
+                                <text x="160" y="109" text-anchor="middle" fill="#fecaca" font-size="9.5" font-family="sans-serif">Sangat Penting (Inti 5W+1H)</text>
+
+                                <!-- 3. Tubuh Berita (Body) -->
+                                <polygon points="72,132 248,132 212,198 108,198" fill="#1e3a8a"/>
+                                <text x="160" y="163" text-anchor="middle" fill="#ffffff" font-size="12.5" font-weight="bold" font-family="sans-serif">3. TUBUH (BODY)</text>
+                                <text x="160" y="179" text-anchor="middle" fill="#bfdbfe" font-size="9.5" font-family="sans-serif">Penjelasan Rinci & Kutipan</text>
+
+                                <!-- 4. Ekor Berita (Tail) -->
+                                <polygon points="112,205 208,205 160,262" fill="#f59e0b"/>
+                                <text x="160" y="228" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="bold" font-family="sans-serif">4. EKOR</text>
+                                <text x="160" y="241" text-anchor="middle" fill="#451a03" font-size="8.5" font-family="sans-serif">Tambahan</text>
+                            </svg>
+                            <span class="text-[11px] text-slate-500 mt-2 font-medium text-center">Semakin ke bawah, tingkat urgensi informasi semakin mengerucut.</span>
+                        </div>
+
+                        <!-- Penjelasan 4 Bagian Struktur -->
+                        <div class="lg:col-span-7 space-y-3">
+                            <div class="p-4 rounded-2xl border-l-4 border-navy-950 bg-slate-50">
+                                <h3 class="font-bold text-navy-950 text-sm">1. Bagian Judul (Headline)</h3>
+                                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                                    Cerminan topik utama berita. Ditulis singkat, padat, menarik perhatian pembaca (menghibur namun tetap faktual/tidak <em>clickbait</em> bohong).
+                                </p>
+                            </div>
+                            <div class="p-4 rounded-2xl border-l-4 border-crimson-600 bg-red-50/40">
+                                <h3 class="font-bold text-crimson-700 text-sm">2. Teras Berita (Lead)</h3>
+                                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                                    Paragraf pertama yang memuat sari pati atau inti berita. Umumnya merangkum unsur <strong>Apa, Siapa, Kapan, dan Di mana</strong> secara langsung.
+                                </p>
+                            </div>
+                            <div class="p-4 rounded-2xl border-l-4 border-blue-700 bg-blue-50/40">
+                                <h3 class="font-bold text-blue-900 text-sm">3. Tubuh Berita (Body)</h3>
+                                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                                    Bagian penjabaran rinci yang menjawab unsur <strong>Mengapa (Why)</strong> dan <strong>Bagaimana (How)</strong>, lengkap dengan kronologi dan kutipan wawancara narasumber.
+                                </p>
+                            </div>
+                            <div class="p-4 rounded-2xl border-l-4 border-amber-500 bg-amber-50/40">
+                                <h3 class="font-bold text-amber-800 text-sm">4. Ekor Berita (Tail)</h3>
+                                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                                    Informasi pelengkap atau penutup (misalnya rencana tindak lanjut atau latar belakang umum) yang tidak terlalu krusial jika dipotong oleh editor.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unsur Kebahasaan Teks Berita -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-navy-900 text-white text-sm flex items-center justify-center">B</span>
+                        Unsur Kebahasaan Teks Berita
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Kalimat Langsung vs Tidak Langsung -->
+                        <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 space-y-3">
+                            <h3 class="font-bold text-navy-900 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-quote-left text-crimson-600"></i>
+                                <span>Kalimat Langsung & Tidak Langsung</span>
+                            </h3>
+                            <div class="p-3 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm">
+                                <span class="font-bold text-crimson-600 block mb-1">Kalimat Langsung (Petikan Asli Narasumber):</span>
+                                <p class="text-slate-700">Ditandai tanda petik ganda ("...").<br><em>Contoh:</em> <strong>"</strong>Baterai organik dari kulit pisang ini mampu menyalakan lampu LED selama 12 jam,<strong>"</strong> ungkap Raka.</p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm">
+                                <span class="font-bold text-navy-800 block mb-1">Kalimat Tidak Langsung (Laporan Penulis):</span>
+                                <p class="text-slate-700">Tanpa tanda petik, memakai kata penghubung <em>bahwa</em> atau <em>agar</em>.<br><em>Contoh:</em> Raka menjelaskan <strong>bahwa</strong> baterai organik dari kulit pisang tersebut mampu menyalakan lampu LED selama 12 jam.</p>
+                            </div>
+                        </div>
+
+                        <!-- Kata Kerja Pewarta & Kaidah Lain -->
+                        <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 space-y-3">
+                            <h3 class="font-bold text-navy-900 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-pen-nib text-amber-600"></i>
+                                <span>Kata Kerja Pewarta & Bahasa Baku</span>
+                            </h3>
+                            <div class="p-3 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm">
+                                <span class="font-bold text-amber-700 block mb-1">Kata Kerja Pewarta:</span>
+                                <p class="text-slate-700">Kata kerja yang digunakan untuk mengawali atau mengakhiri kutipan narasumber. <br><em>Contoh:</em> <strong>ujar, kata, tutur, jelas, ungkap, papar, tegas, tambah.</strong></p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm">
+                                <span class="font-bold text-emerald-700 block mb-1">Keterangan Waktu & Konjungsi Temporal:</span>
+                                <p class="text-slate-700">Menunjukkan kronologi peristiwa secara jelas.<br><em>Contoh:</em> <strong>kemarin, pada Senin pagi, kemudian, setelah itu, akhirnya.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AKTIVITAS INTERAKTIF 2: MENCOCOKKAN STRUKTUR TEKS BERITA -->
+                    <div class="p-5 sm:p-6 rounded-2xl bg-slate-900 text-white space-y-4">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <div class="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
+                                <i class="fa-solid fa-shuffle"></i>
+                                <span>Aktivitas Interaktif 2: Mencocokkan Struktur Berita</span>
+                            </div>
+                            <button onclick="checkStructureMatch()" class="bg-crimson-600 hover:bg-crimson-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">
+                                Periksa Jawaban
+                            </button>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300">
+                            Cocokkan setiap potongan paragraf berita berikut dengan nama bagian strukturnya yang tepat!
+                        </p>
+
+                        <div class="space-y-3">
+                            <div class="bg-white/10 p-4 rounded-xl border border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                <p class="text-xs sm:text-sm text-slate-100">
+                                    <strong>Potongan A:</strong> "Dinas Pendidikan setempat berencana mengadakan pameran serupa di tingkat provinsi pada tahun ajaran mendatang."
+                                </p>
+                                <select id="match-1" class="bg-navy-950 text-white text-xs font-semibold px-3 py-2 rounded-lg border border-slate-600 shrink-0">
+                                    <option value="">-- Pilih Struktur --</option>
+                                    <option value="judul">Judul (Headline)</option>
+                                    <option value="teras">Teras Berita (Lead)</option>
+                                    <option value="tubuh">Tubuh Berita (Body)</option>
+                                    <option value="ekor">Ekor Berita (Tail)</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-white/10 p-4 rounded-xl border border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                <p class="text-xs sm:text-sm text-slate-100">
+                                    <strong>Potongan B:</strong> "Unik! Pelajar SMA di Malang Ubah Limbah Ampas Kopi Jadi Tinta Spidol Ramah Lingkungan"
+                                </p>
+                                <select id="match-2" class="bg-navy-950 text-white text-xs font-semibold px-3 py-2 rounded-lg border border-slate-600 shrink-0">
+                                    <option value="">-- Pilih Struktur --</option>
+                                    <option value="judul">Judul (Headline)</option>
+                                    <option value="teras">Teras Berita (Lead)</option>
+                                    <option value="tubuh">Tubuh Berita (Body)</option>
+                                    <option value="ekor">Ekor Berita (Tail)</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-white/10 p-4 rounded-xl border border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                <p class="text-xs sm:text-sm text-slate-100">
+                                    <strong>Potongan C:</strong> "MALANG — Sekelompok siswa kelas XI SMAN 3 Malang meluncurkan inovasi tinta spidol papan tulis berbahan dasar ampas kopi pada Rabu (5/11/2025)."
+                                </p>
+                                <select id="match-3" class="bg-navy-950 text-white text-xs font-semibold px-3 py-2 rounded-lg border border-slate-600 shrink-0">
+                                    <option value="">-- Pilih Struktur --</option>
+                                    <option value="judul">Judul (Headline)</option>
+                                    <option value="teras">Teras Berita (Lead)</option>
+                                    <option value="tubuh">Tubuh Berita (Body)</option>
+                                    <option value="ekor">Ekor Berita (Tail)</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-white/10 p-4 rounded-xl border border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                <p class="text-xs sm:text-sm text-slate-100">
+                                    <strong>Potongan D:</strong> "'Proses ekstraksi karbon dari ampas kopi kami campurkan dengan getah karet alami agar tinta mudah dihapus tanpa meninggalkan noda,' jelas ketua tim."
+                                </p>
+                                <select id="match-4" class="bg-navy-950 text-white text-xs font-semibold px-3 py-2 rounded-lg border border-slate-600 shrink-0">
+                                    <option value="">-- Pilih Struktur --</option>
+                                    <option value="judul">Judul (Headline)</option>
+                                    <option value="teras">Teras Berita (Lead)</option>
+                                    <option value="tubuh">Tubuh Berita (Body)</option>
+                                    <option value="ekor">Ekor Berita (Tail)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="match-feedback" class="hidden p-3.5 rounded-xl text-xs sm:text-sm font-semibold"></div>
+                    </div>
+
+                    <!-- Ringkasan & Navigasi Subbab 2 -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                        <h4 class="font-bold text-amber-900 text-sm mb-1.5"><i class="fa-solid fa-star mr-1.5"></i>Ringkasan Subbab 2</h4>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed">
+                            Teks berita disusun menggunakan pola <strong>piramida terbalik</strong> yang terdiri atas <em>Judul, Teras Berita, Tubuh Berita,</em> dan <em>Ekor Berita</em>. Ciri kebahasaannya meliputi penggunaan bahasa baku, <strong>kalimat langsung dan tidak langsung</strong>, serta <strong>kata kerja pewarta</strong>.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                        <button onclick="navigateTo('sub1')" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button onclick="markComplete('sub2', 'sub3')" class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-bold flex items-center gap-2 shadow-md transition">
+                            <span>Tandai Selesai & Lanjut</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- SUBBAB 3: MEMAHAMI PENYAJIAN TEKS BERITA DALAM BENTUK VLOG -->
+            <!-- ===================================================================== -->
+            <section id="section-sub3" class="content-section hidden fade-in-section space-y-6">
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="px-3 py-1 rounded-full bg-red-100 text-crimson-700 text-xs font-extrabold uppercase tracking-wider">Bagian 3 dari 6</span>
+                        <span class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-video mr-1"></i> Jurnalistik Multimedia</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-3">3. Memahami Penyajian Teks Berita dalam Bentuk Vlog</h1>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        Di era digital saat ini, berita tidak hanya dibaca lewat tulisan, tetapi juga ditonton melalui video pendek atau <strong>vlog berita</strong>. Bagaimana cara menyajikan informasi inovasi secara visual agar informatif sekaligus menghibur?
+                    </p>
+                </div>
+
+                <!-- Pengertian & Perbandingan -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <div class="bg-red-50/80 border-l-4 border-crimson-600 rounded-r-2xl p-5">
+                        <div class="flex items-center gap-2 text-crimson-700 font-bold text-sm mb-1">
+                            <i class="fa-solid fa-clapperboard"></i>
+                            <span>APA ITU VLOG BERITA?</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            <strong>Vlog berita (Video Blog Jurnalistik)</strong> adalah penyajian laporan berita faktual dalam format audio-visual yang dibawakan secara personal, komunikatif, dan dinamis oleh pembawa acara (vlogger/reporter) dengan dukungan rekaman gambar peristiwa di lapangan.
+                        </p>
+                    </div>
+
+                    <!-- Tabel Perbedaan Berita Tertulis vs Vlog Berita -->
+                    <h3 class="text-lg font-bold text-navy-900">Perbedaan Berita Tertulis dan Vlog Berita</h3>
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-navy-900 text-white">
+                                    <th class="p-3.5 font-bold">Aspek</th>
+                                    <th class="p-3.5 font-bold text-blue-200">Berita Tertulis (Artikel)</th>
+                                    <th class="p-3.5 font-bold text-amber-300">Vlog Berita (Audio-Visual)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white">
+                                <tr>
+                                    <td class="p-3.5 font-semibold">Media & Indra</td>
+                                    <td class="p-3.5 text-slate-600">Teks & foto; mengandalkan indra penglihatan (membaca).</td>
+                                    <td class="p-3.5 text-slate-600">Video, suara, musik latar, teks grafis; penglihatan & pendengaran.</td>
+                                </tr>
+                                <tr class="bg-slate-50/70">
+                                    <td class="p-3.5 font-semibold">Gaya Bahasa</td>
+                                    <td class="p-3.5 text-slate-600">Formal, baku, dan ringkas sesuai kaidah EYD.</td>
+                                    <td class="p-3.5 text-slate-600">Semi-formal, komunikatif, luwes, dan menyapa penonton langsung.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold">Kekuatan Utama</td>
+                                    <td class="p-3.5 text-slate-600">Kedalaman data, angka detail, dan kutipan panjang.</td>
+                                    <td class="p-3.5 text-slate-600">Ekspresi emosi, demonstrasi langsung alat inovasi, dan daya hibur tinggi.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Teknik Penyampaian Lisan & Pengambilan Gambar -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                            <h3 class="font-bold text-navy-900 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-microphone-lines text-crimson-600"></i>
+                                <span>Teknik Penyampaian Lisan (4 Pilar)</span>
+                            </h3>
+                            <ul class="text-xs sm:text-sm text-slate-700 space-y-2.5">
+                                <li><strong>1. Artikulasi:</strong> Pelafalan setiap huruf vokal dan konsonan harus jelas, tidak bergumam atau terlalu terburu-buru.</li>
+                                <li><strong>2. Intonasi:</strong> Penekanan tinggi-rendah nada suara agar tidak datar/monoton; berikan penekanan pada kata kunci inovasi.</li>
+                                <li><strong>3. Ekspresi Wajah:</strong> Mimik antusias, ramah, dan meyakinkan sesuai suasana berita yang menghibur.</li>
+                                <li><strong>4. Bahasa Tubuh (Gestur):</strong> Postur tegap, kontak mata fokus ke lensa kamera, dan gerakan tangan wajar untuk menunjuk objek.</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                            <h3 class="font-bold text-navy-900 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-camera text-navy-800"></i>
+                                <span>Teknik Pengambilan Video Sederhana</span>
+                            </h3>
+                            <ul class="text-xs sm:text-sm text-slate-700 space-y-2.5">
+                                <li><strong>1. Komposisi Rule of Thirds:</strong> Posisikan presenter pada garis sepertiga layar agar seimbang dengan latar inovasi.</li>
+                                <li><strong>2. Pencahayaan (Lighting):</strong> Menghadap sumber cahaya alami (jendela/matahari pagi) agar wajah tidak gelap (<em>backlight</em>).</li>
+                                <li><strong>3. Variasi Sudut Gambar:</strong> Kombinasikan <em>Medium Shot</em> (presenter bicara) dan <em>Close-Up</em> (detail cara kerja alat).</li>
+                                <li><strong>4. Audio Jernih:</strong> Rekam di tempat minim kebisingan atau gunakan mikrofon klip/headset ponsel.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulasi Player Referensi Vlog Berita & Contoh Naskah -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-crimson-600 text-white text-sm flex items-center justify-center">B</span>
+                        Simulasi Referensi Vlog & Contoh Skenario Naskah
+                    </h2>
+
+                    <!-- Simulasi Layar Vlog Interaktif -->
+                    <div class="rounded-2xl overflow-hidden bg-navy-950 border border-slate-800 shadow-xl">
+                        <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-crimson-500 animate-live"></span>
+                                <span class="text-xs font-bold text-white tracking-wide">SIMULASI PREVIEW VLOG BERITA INOVASI (DURASI 01:30)</span>
+                            </div>
+                            <span class="text-[11px] bg-amber-400 text-navy-950 font-bold px-2.5 py-0.5 rounded">1080p HD • 16:9</span>
+                        </div>
+
+                        <div class="p-6 sm:p-8 text-center space-y-4 bg-gradient-to-b from-navy-900 to-navy-950">
+                            <div id="vlog-screen-display" class="max-w-2xl mx-auto p-6 rounded-2xl bg-black/50 border border-white/15 min-h-[190px] flex flex-col items-center justify-center space-y-3">
+                                <div class="w-14 h-14 rounded-full bg-crimson-600 text-white flex items-center justify-center text-xl shadow-lg">
+                                    <i class="fa-solid fa-play ml-1"></i>
+                                </div>
+                                <h3 class="text-white font-bold text-base sm:text-lg">"Sepatu Charger Langkah Kaki Karya Siswa SMK!"</h3>
+                                <p class="text-xs sm:text-sm text-slate-300 max-w-md">
+                                    Klik tombol adegan di bawah untuk melihat bagaimana alur visual, audio, dan teks grafis (lower third) bekerja dalam sebuah vlog berita.
+                                </p>
+                            </div>
+
+                            <!-- Kontrol Adegan Simulasi -->
+                            <div class="flex flex-wrap justify-center gap-2 pt-2">
+                                <button onclick="playVlogScene(1)" class="vlog-scene-btn px-3.5 py-2 rounded-xl bg-white/10 hover:bg-crimson-600 text-white text-xs font-semibold transition">
+                                    00:00 Hook & Opening
+                                </button>
+                                <button onclick="playVlogScene(2)" class="vlog-scene-btn px-3.5 py-2 rounded-xl bg-white/10 hover:bg-crimson-600 text-white text-xs font-semibold transition">
+                                    00:25 Demo Alat (Close-Up)
+                                </button>
+                                <button onclick="playVlogScene(3)" class="vlog-scene-btn px-3.5 py-2 rounded-xl bg-white/10 hover:bg-crimson-600 text-white text-xs font-semibold transition">
+                                    00:55 Wawancara Inovator
+                                </button>
+                                <button onclick="playVlogScene(4)" class="vlog-scene-btn px-3.5 py-2 rounded-xl bg-white/10 hover:bg-crimson-600 text-white text-xs font-semibold transition">
+                                    01:15 Closing & Call to Action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Skenario Naskah Vlog Berita -->
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-navy-900 text-base">Contoh Skenario Naskah Vlog Berita Inovasi:</h3>
+                        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="bg-navy-900 text-white">
+                                        <th class="p-3 font-bold w-24">Bagian</th>
+                                        <th class="p-3 font-bold w-48">Visual / Kamera</th>
+                                        <th class="p-3 font-bold">Audio / Narasi Pembawa Berita</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 bg-white">
+                                    <tr>
+                                        <td class="p-3 font-bold text-crimson-600">1. Hook & Pembuka<br><span class="text-[11px] text-slate-400 font-normal">(00:00-00:20)</span></td>
+                                        <td class="p-3 text-slate-600"><em>Medium Shot:</em> Vlogger berjalan sambil menunjuk sepatu yang menyala kabel USB ke ponsel.</td>
+                                        <td class="p-3 text-slate-800">"Pernah kebayang nggak, jalan kaki ke sekolah tapi sambil ngecas HP? Nah, ini bukan sulap! Kenalin, sepatu penghasil listrik karya siswa kelas XI!"</td>
+                                    </tr>
+                                    <tr class="bg-slate-50/70">
+                                        <td class="p-3 font-bold text-navy-800">2. Isi & Demo<br><span class="text-[11px] text-slate-400 font-normal">(00:20-00:50)</span></td>
+                                        <td class="p-3 text-slate-600"><em>Close-Up:</em> Kepingan sensor piezoelektrik di sol sepatu & layar indikator baterai HP naik.</td>
+                                        <td class="p-3 text-slate-800">"Inovasi bernama <em>StepVolt</em> ini memanfaatkan lempeng piezoelektrik di bagian sol. Setiap tekanan langkah kaki diubah menjadi energi listrik yang disimpan di modul baterai mini."</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold text-amber-700">3. Wawancara<br><span class="text-[11px] text-slate-400 font-normal">(00:50-01:15)</span></td>
+                                        <td class="p-3 text-slate-600"><em>Two-Shot:</em> Vlogger mewawancarai pencipta alat di bengkel sekolah.</td>
+                                        <td class="p-3 text-slate-800"><strong>Vlogger:</strong> "Butuh berapa lama sampai prototipe ini jadi?"<br><strong>Inovator:</strong> "Sekitar tiga minggu riset, Kak, dengan biaya komponen di bawah seratus ribu rupiah."</td>
+                                    </tr>
+                                    <tr class="bg-slate-50/70">
+                                        <td class="p-3 font-bold text-emerald-700">4. Penutup<br><span class="text-[11px] text-slate-400 font-normal">(01:15-01:30)</span></td>
+                                        <td class="p-3 text-slate-600"><em>Medium Shot:</em> Vlogger melambaikan tangan dengan grafis kredit tim.</td>
+                                        <td class="p-3 text-slate-800">"Keren banget kan kreativitas anak bangsa? Tulis pendapat kalian di kolom komentar, inovasi apa lagi yang harus kita liput! Saya Alya, pamit undur diri!"</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Ringkasan & Navigasi Subbab 3 -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                        <h4 class="font-bold text-amber-900 text-sm mb-1.5"><i class="fa-solid fa-star mr-1.5"></i>Ringkasan Subbab 3</h4>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed">
+                            Vlog berita memadukan akurasi jurnalistik dengan gaya penyampaian audio-visual yang segar. Keberhasilannya ditentukan oleh penguasaan <strong>artikulasi, intonasi, ekspresi, gestur</strong>, serta teknik pengambilan gambar dan naskah yang terstruktur (<em>Hook – Isi – Wawancara – Penutup</em>).
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                        <button onclick="navigateTo('sub2')" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button onclick="markComplete('sub3', 'sub4')" class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-bold flex items-center gap-2 shadow-md transition">
+                            <span>Tandai Selesai & Lanjut</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- SUBBAB 4: PROYEK MEMBUAT VLOG BERITA INOVASI -->
+            <!-- ===================================================================== -->
+            <section id="section-sub4" class="content-section hidden fade-in-section space-y-6">
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wider">Bagian 4 dari 6</span>
+                        <span class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-film mr-1"></i> Pembelajaran Berbasis Proyek</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-3">4. Proyek Membuat Vlog Berita Inovasi yang Menghibur</h1>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        Saatnya praktik menjadi jurnalis kreator! Bentuklah kelompok beranggotakan 3–4 orang (atau kerjakan secara individu sesuai arahan guru) untuk memproduksi satu video vlog berita bertema inovasi berdurasi <strong>2–4 menit</strong>.
+                    </p>
+                </div>
+
+                <!-- 8 Tahapan Proyek -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-navy-900 text-white text-sm flex items-center justify-center">A</span>
+                        8 Tahapan Pengerjaan Proyek Vlog
+                    </h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="inline-block w-7 h-7 rounded-lg bg-navy-900 text-amber-400 font-bold text-xs text-center leading-7 mb-2">1</span>
+                            <h3 class="font-bold text-navy-900 text-sm">Menentukan Topik</h3>
+                            <p class="text-xs text-slate-600 mt-1">Pilih inovasi menarik di lingkungan sekolah atau masyarakat sekitar.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="inline-block w-7 h-7 rounded-lg bg-navy-900 text-amber-400 font-bold text-xs text-center leading-7 mb-2">2</span>
+                            <h3 class="font-bold text-navy-900 text-sm">Mengumpulkan Data</h3>
+                            <p class="text-xs text-slate-600 mt-1">Riset fakta dari narasumber langsung atau sumber terpercaya.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="inline-block w-7 h-7 rounded-lg bg-navy-900 text-amber-400 font-bold text-xs text-center leading-7 mb-2">3</span>
+                            <h3 class="font-bold text-navy-900 text-sm">Merumuskan 5W+1H</h3>
+                            <p class="text-xs text-slate-600 mt-1">Susun kerangka ADIKSIMBA agar tidak ada informasi penting yang terlewat.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="inline-block w-7 h-7 rounded-lg bg-navy-900 text-amber-400 font-bold text-xs text-center leading-7 mb-2">4</span>
+                            <h3 class="font-bold text-navy-900 text-sm">Menyusun Naskah</h3>
+                            <p class="text-xs text-slate-600 mt-1">Tulis dialog pembuka, inti berita, pertanyaan wawancara, dan penutup.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="inline-block w-7 h-7 rounded-lg bg-crimson-600 text-white font-bold text-xs text-center leading-7 mb-2">5</span>
+                            <h3 class="font-bold text-navy-900 text-sm">Membuat Storyboard</h3>
+                            <p class="text-xs text-slate-600 mt-1">Rancang urutan adegan visual, sudut kamera, dan durasi tiap klip.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="inline-block w-7 h-7 rounded-lg bg-crimson-600 text-white font-bold text-xs text-center leading-7 mb-2">6</span>
+                            <h3 class="font-bold text-navy-900 text-sm">Pengambilan Video</h3>
+                            <p class="text-xs text-slate-600 mt-1">Rekam adegan presenter dan demonstrasi inovasi dengan cahaya & audio baik.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="inline-block w-7 h-7 rounded-lg bg-crimson-600 text-white font-bold text-xs text-center leading-7 mb-2">7</span>
+                            <h3 class="font-bold text-navy-900 text-sm">Penyuntingan (Editing)</h3>
+                            <p class="text-xs text-slate-600 mt-1">Potong bagian jeda, tambahkan teks judul, transisi, dan musik latar ringan.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="inline-block w-7 h-7 rounded-lg bg-crimson-600 text-white font-bold text-xs text-center leading-7 mb-2">8</span>
+                            <h3 class="font-bold text-navy-900 text-sm">Publikasi & Presentasi</h3>
+                            <p class="text-xs text-slate-600 mt-1">Tayangkan di kelas atau unggah ke kanal media sekolah untuk mendapat umpan balik.</p>
+                        </div>
+                    </div>
+
+                    <!-- Contoh Ide Topik Vlog -->
+                    <div class="p-5 rounded-2xl bg-blue-50 border border-blue-200">
+                        <h3 class="font-bold text-navy-900 text-sm mb-2.5 flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                            <span>Inspirasi Ide Topik Vlog Berita Inovasi:</span>
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs sm:text-sm text-slate-700">
+                            <div class="bg-white p-3 rounded-xl border border-blue-100">• Inovasi pertanian hidroponik otomatis berbasis sensor kelembapan di kebun sekolah.</div>
+                            <div class="bg-white p-3 rounded-xl border border-blue-100">• Pengolahan minyak jelantah menjadi lilin aromaterapi atau sabun ramah lingkungan.</div>
+                            <div class="bg-white p-3 rounded-xl border border-blue-100">• Aplikasi atau sistem kasir digital karya siswa untuk memodernisasi koperasi/kantin sekolah.</div>
+                            <div class="bg-white p-3 rounded-xl border border-blue-100">• Pemanfaatan limbah kulit buah lokal menjadi bio-plastik atau pupuk cair organik.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh Storyboard Sederhana & Checklist Interaktif -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-crimson-600 text-white text-sm flex items-center justify-center">B</span>
+                        Contoh Storyboard & Checklist Persiapan Produksi
+                    </h2>
+
+                    <!-- Contoh Storyboard Visual -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="rounded-2xl border border-slate-200 overflow-hidden bg-slate-50">
+                            <div class="bg-navy-900 text-white px-4 py-2 text-xs font-bold flex justify-between">
+                                <span>SCENE 1: OPENING</span>
+                                <span class="text-amber-400">00:00 - 00:25</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="h-24 rounded-xl bg-blue-100 flex flex-col items-center justify-center text-navy-800">
+                                    <i class="fa-solid fa-person-rays text-2xl mb-1"></i>
+                                    <span class="text-[11px] font-bold">Medium Shot Presenter</span>
+                                </div>
+                                <p class="text-xs text-slate-600"><strong>Visual:</strong> Presenter berdiri di depan kebun hidroponik sekolah dengan ekspresi ceria.<br><strong>Audio:</strong> Sapaan pembuka & pertanyaan pemantik.</p>
+                            </div>
+                        </div>
+
+                        <div class="rounded-2xl border border-slate-200 overflow-hidden bg-slate-50">
+                            <div class="bg-navy-900 text-white px-4 py-2 text-xs font-bold flex justify-between">
+                                <span>SCENE 2: DEMONSTRASI</span>
+                                <span class="text-amber-400">00:25 - 01:15</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="h-24 rounded-xl bg-amber-100 flex flex-col items-center justify-center text-amber-800">
+                                    <i class="fa-solid fa-magnifying-glass-chart text-2xl mb-1"></i>
+                                    <span class="text-[11px] font-bold">Close-Up Cara Kerja Alat</span>
+                                </div>
+                                <p class="text-xs text-slate-600"><strong>Visual:</strong> Sorotan dekat pompa air otomatis menyala saat sensor mendeteksi kekeringan.<br><strong>Audio:</strong> Voice-over penjelasan 5W+1H.</p>
+                            </div>
+                        </div>
+
+                        <div class="rounded-2xl border border-slate-200 overflow-hidden bg-slate-50">
+                            <div class="bg-navy-900 text-white px-4 py-2 text-xs font-bold flex justify-between">
+                                <span>SCENE 3: WAWANCARA & CLOSING</span>
+                                <span class="text-amber-400">01:15 - 02:30</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="h-24 rounded-xl bg-emerald-100 flex flex-col items-center justify-center text-emerald-800">
+                                    <i class="fa-solid fa-comments text-2xl mb-1"></i>
+                                    <span class="text-[11px] font-bold">Two-Shot Narasumber</span>
+                                </div>
+                                <p class="text-xs text-slate-600"><strong>Visual:</strong> Tanya jawab singkat dengan pembuat alat lalu ditutup salam reporter.<br><strong>Audio:</strong> Kutipan langsung & musik penutup.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Checklist Persiapan Pembuatan Vlog (Interaktif Bisa Dicentang) -->
+                    <div class="p-5 rounded-2xl bg-slate-900 text-white">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-list-check"></i>
+                                <span>Checklist Persiapan Pembuatan Vlog (Klik untuk Menandai)</span>
+                            </h3>
+                            <span id="checklist-counter" class="text-xs bg-white/10 px-2.5 py-1 rounded-lg font-semibold">0 / 6 Siap</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs sm:text-sm">
+                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition">
+                                <input type="checkbox" onchange="updateChecklist()" class="vlog-check w-4 h-4 accent-amber-400 rounded">
+                                <span>Topik inovasi telah diverifikasi faktanya & izin narasumber siap.</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition">
+                                <input type="checkbox" onchange="updateChecklist()" class="vlog-check w-4 h-4 accent-amber-400 rounded">
+                                <span>Unsur 5W+1H lengkap tercantum dalam draf naskah berita.</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition">
+                                <input type="checkbox" onchange="updateChecklist()" class="vlog-check w-4 h-4 accent-amber-400 rounded">
+                                <span>Storyboard adegan dan pembagian tugas tim sudah disepakati.</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition">
+                                <input type="checkbox" onchange="updateChecklist()" class="vlog-check w-4 h-4 accent-amber-400 rounded">
+                                <span>Baterai kamera/ponsel penuh dan ruang penyimpanan mencukupi.</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition">
+                                <input type="checkbox" onchange="updateChecklist()" class="vlog-check w-4 h-4 accent-amber-400 rounded">
+                                <span>Lokasi syuting memiliki pencahayaan terang dan minim kebisingan.</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition">
+                                <input type="checkbox" onchange="updateChecklist()" class="vlog-check w-4 h-4 accent-amber-400 rounded">
+                                <span>Musik latar yang dipilih bebas hak cipta (copyright-free).</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Rubrik Penilaian Proyek -->
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-navy-900 text-base">Rubrik Penilaian Proyek Vlog Berita:</h3>
+                        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="bg-navy-900 text-white">
+                                        <th class="p-3 font-bold">Aspek Penilaian</th>
+                                        <th class="p-3 font-bold text-amber-300">Sangat Baik (4)</th>
+                                        <th class="p-3 font-bold text-blue-200">Baik (3)</th>
+                                        <th class="p-3 font-bold text-slate-300">Cukup (2)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 bg-white">
+                                    <tr>
+                                        <td class="p-3 font-bold text-navy-900">1. Ketepatan Informasi</td>
+                                        <td class="p-3 text-slate-700">Seluruh data faktual, akurat, bebas hoaks, dan memuat 5W+1H secara utuh.</td>
+                                        <td class="p-3 text-slate-600">Data faktual dan memuat minimal 5 unsur berita dengan tepat.</td>
+                                        <td class="p-3 text-slate-600">Beberapa informasi kurang akurat atau unsur 5W+1H tidak lengkap.</td>
+                                    </tr>
+                                    <tr class="bg-slate-50/70">
+                                        <td class="p-3 font-bold text-navy-900">2. Struktur Berita</td>
+                                        <td class="p-3 text-slate-700">Alur piramida terbalik (judul, teras, tubuh, ekor) tersusun sangat runtut.</td>
+                                        <td class="p-3 text-slate-600">Struktur berita runtut namun bagian penutup kurang tajam.</td>
+                                        <td class="p-3 text-slate-600">Alur penyampaian informasi melompat-lompat dan membingungkan.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold text-navy-900">3. Kreativitas</td>
+                                        <td class="p-3 text-slate-700">Konsep vlog segar, menghibur, serta menampilkan visualisasi alat inovatif.</td>
+                                        <td class="p-3 text-slate-600">Konsep cukup menarik dan variatif dalam pengambilan sudut gambar.</td>
+                                        <td class="p-3 text-slate-600">Penyajian terkesan kaku seperti sekadar membacakan teks biasa.</td>
+                                    </tr>
+                                    <tr class="bg-slate-50/70">
+                                        <td class="p-3 font-bold text-navy-900">4. Kemampuan Berbicara</td>
+                                        <td class="p-3 text-slate-700">Artikulasi sangat jelas, intonasi dinamis, ekspresif, dan percaya diri.</td>
+                                        <td class="p-3 text-slate-600">Suara jelas dan komunikatif meski sesekali masih melihat catatan.</td>
+                                        <td class="p-3 text-slate-600">Intonasi datar, pelafalan kurang jelas, atau terlalu sering membaca teks.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold text-navy-900">5. Kualitas Penyajian</td>
+                                        <td class="p-3 text-slate-700">Gambar stabil, pencahayaan optimal, audio jernih, serta editing rapi.</td>
+                                        <td class="p-3 text-slate-600">Visual dan audio baik meski terdapat sedikit gangguan suara latar.</td>
+                                        <td class="p-3 text-slate-600">Gambar buram/gelap atau suara pembicara tertutup kebisingan.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Ringkasan & Navigasi Subbab 4 -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                        <h4 class="font-bold text-amber-900 text-sm mb-1.5"><i class="fa-solid fa-star mr-1.5"></i>Ringkasan Subbab 4</h4>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed">
+                            Produksi vlog berita yang berkualitas memerlukan perencanaan matang melalui <strong>8 tahap proyek</strong>, mulai dari riset topik, penyusunan 5W+1H, pembuatan naskah dan <em>storyboard</em>, hingga proses syuting, penyuntingan, dan publikasi sesuai rubrik penilaian.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                        <button onclick="navigateTo('sub3')" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button onclick="markComplete('sub4', 'sub5')" class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-bold flex items-center gap-2 shadow-md transition">
+                            <span>Tandai Selesai & Lanjut</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- SUBBAB 5: JURNAL MEMBACA BERITA INOVASI -->
+            <!-- ===================================================================== -->
+            <section id="section-sub5" class="content-section hidden fade-in-section space-y-6">
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold uppercase tracking-wider">Bagian 5 dari 6</span>
+                        <span class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-book-journal-whills mr-1"></i> Literasi Membaca</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-3">5. Jurnal Membaca Berita Inovasi</h1>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        Carilah satu artikel berita tentang inovasi teknologi, sains, atau lingkungan dari portal berita terpercaya. Catat hasil bacaanmu pada formulir interaktif di bawah ini, lalu simpan atau salin hasilnya untuk dikumpulkan kepada guru!
+                    </p>
+                </div>
+
+                <!-- Form Jurnal Membaca Interaktif -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-navy-900 mb-1.5">1. Judul Berita / Artikel Inovasi *</label>
+                            <input type="text" id="jm-judul" placeholder="Contoh: Mahasiswa Indonesia Ciptakan Beton Ramah Lingkungan dari Limbah Cangkang Kerang" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-navy-800 focus:ring-2 focus:ring-blue-100 outline-none text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-navy-900 mb-1.5">2. Nama Penulis atau Sumber Berita *</label>
+                            <input type="text" id="jm-sumber" placeholder="Contoh: Kompas.com / Antara News / Redaksi Sains" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-navy-800 focus:ring-2 focus:ring-blue-100 outline-none text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-navy-900 mb-1.5">3. Tanggal Publikasi *</label>
+                            <input type="date" id="jm-tanggal" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-navy-800 focus:ring-2 focus:ring-blue-100 outline-none text-sm">
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-navy-900 mb-1.5">4. Informasi Penting yang Ditemukan (Ringkasan 5W+1H) *</label>
+                            <textarea id="jm-penting" rows="3" placeholder="Tuliskan pokok-pokok peristiwa: apa inovasinya, siapa penemunya, kapan & di mana dibuat, serta cara kerjanya..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-navy-800 focus:ring-2 focus:ring-blue-100 outline-none text-sm"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-navy-900 mb-1.5">5. Fakta Menarik dari Bacaan</label>
+                            <textarea id="jm-fakta" rows="3" placeholder="Tuliskan data angka, keunggulan unik, atau fakta mengejutkan yang ada dalam berita..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-navy-800 focus:ring-2 focus:ring-blue-100 outline-none text-sm"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-navy-900 mb-1.5">6. Hal Baru yang Dipelajari</label>
+                            <textarea id="jm-halbaru" rows="3" placeholder="Istilah teknis baru atau wawasan ilmu pengetahuan yang baru kamu ketahui..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-navy-800 focus:ring-2 focus:ring-blue-100 outline-none text-sm"></textarea>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-navy-900 mb-1.5">7. Pendapat atau Tanggapan Siswa</label>
+                            <textarea id="jm-pendapat" rows="3" placeholder="Bagaimana penilaianmu terhadap manfaat inovasi tersebut bagi kehidupan masyarakat?" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-navy-800 focus:ring-2 focus:ring-blue-100 outline-none text-sm"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi Jurnal -->
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="saveJournalEntry()" class="bg-navy-900 hover:bg-navy-800 text-white font-bold px-5 py-3 rounded-xl text-sm flex items-center gap-2 shadow-sm transition">
+                            <i class="fa-solid fa-floppy-disk text-amber-400"></i>
+                            <span>Simpan ke Daftar Jurnal</span>
+                        </button>
+                        <button onclick="copyJournalText()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold px-5 py-3 rounded-xl text-sm flex items-center gap-2 border border-slate-300 transition">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Salin Teks Jurnal</span>
+                        </button>
+                    </div>
+
+                    <!-- Daftar Jurnal Tersimpan -->
+                    <div id="saved-journals-wrapper" class="hidden pt-4 border-t border-slate-200 space-y-3">
+                        <h3 class="font-bold text-navy-900 text-sm">Catatan Jurnal Membaca Tersimpan:</h3>
+                        <div id="saved-journals-list" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Ringkasan & Navigasi Subbab 5 -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                        <h4 class="font-bold text-amber-900 text-sm mb-1.5"><i class="fa-solid fa-star mr-1.5"></i>Ringkasan Subbab 5</h4>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed">
+                            Kebiasaan mencatat dalam <strong>Jurnal Membaca</strong> melatih kemampuan berpikir kritis dalam memisahkan fakta utama, menyerap kosakata baru, serta merumuskan tanggapan logis terhadap perkembangan inovasi terkini.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                        <button onclick="navigateTo('sub4')" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button onclick="markComplete('sub5', 'sub6')" class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-sm font-bold flex items-center gap-2 shadow-md transition">
+                            <span>Tandai Selesai & Lanjut</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- SUBBAB 6: REFLEKSI KEGIATAN PEMBELAJARAN & KUIS EVALUASI BAB 2 -->
+            <!-- ===================================================================== -->
+            <section id="section-sub6" class="content-section hidden fade-in-section space-y-6">
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-xs font-extrabold uppercase tracking-wider">Bagian 6 dari 6</span>
+                        <span class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-award mr-1"></i> Evaluasi & Refleksi Akhir</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-3">6. Refleksi Kegiatan Pembelajaran & Kuis Evaluasi Bab 2</h1>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        Selamat telah mencapai penghujung Bab 2! Mari lakukan refleksi atas proses belajarmu dan uji penguasaan materimu melalui kuis interaktif di bawah ini.
+                    </p>
+                </div>
+
+                <!-- Halaman Refleksi Diri -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-5">
+                    <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-navy-900 text-white text-sm flex items-center justify-center">A</span>
+                        Lembar Refleksi Pemahaman Siswa
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-800 mb-1.5">1. Apa pengetahuan baru yang saya peroleh dari bab ini?</label>
+                            <textarea id="ref-1" rows="2" placeholder="Tuliskan jawaban refleksimu di sini..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-navy-800 outline-none text-sm"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-800 mb-1.5">2. Bagaimana cara membedakan berita yang aktual dan akurat?</label>
+                            <textarea id="ref-2" rows="2" placeholder="Tuliskan jawaban refleksimu di sini..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-navy-800 outline-none text-sm"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-800 mb-1.5">3. Apa kesulitan yang saya alami ketika memahami struktur berita?</label>
+                            <textarea id="ref-3" rows="2" placeholder="Tuliskan jawaban refleksimu di sini..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-navy-800 outline-none text-sm"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-800 mb-1.5">4. Apa pengalaman yang saya peroleh ketika merancang atau membuat vlog?</label>
+                            <textarea id="ref-4" rows="2" placeholder="Tuliskan jawaban refleksimu di sini..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-navy-800 outline-none text-sm"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-800 mb-1.5">5. Bagaimana saya dapat menerapkan pengetahuan ini dalam kehidupan sehari-hari?</label>
+                            <textarea id="ref-5" rows="2" placeholder="Tuliskan jawaban refleksimu di sini..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-navy-800 outline-none text-sm"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="copyReflection()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold px-4 py-2.5 rounded-xl text-xs sm:text-sm border border-slate-300 flex items-center gap-2 transition">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Salin Hasil Refleksi</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kuis Pilihan Ganda Interaktif -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <h2 class="text-xl font-bold text-navy-900 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-crimson-600 text-white text-sm flex items-center justify-center">B</span>
+                            Kuis Evaluasi Pemahaman Bab 2 (5 Soal)
+                        </h2>
+                        <span id="quiz-score-badge" class="hidden px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs">Skor: 0 / 100</span>
+                    </div>
+
+                    <div id="final-quiz-container" class="space-y-5">
+                        <!-- Soal dirender lewat JavaScript agar interaktif dan rapi -->
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                        <button onclick="resetFinalQuiz()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold transition">
+                            <i class="fa-solid fa-rotate-right mr-1.5"></i> Ulangi Kuis
+                        </button>
+                        <button onclick="submitFinalQuiz()" class="px-6 py-3 rounded-xl bg-crimson-600 hover:bg-crimson-700 text-white text-sm font-bold shadow-md transition">
+                            <i class="fa-solid fa-paper-plane mr-1.5"></i> Periksa Hasil Kuis
+                        </button>
+                    </div>
+
+                    <!-- Ringkasan & Selesai Bab -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+                        <h4 class="font-bold text-amber-900 text-sm mb-1.5"><i class="fa-solid fa-trophy mr-1.5"></i>Ringkasan Akhir Bab 2</h4>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed">
+                            Kamu telah mempelajari seluruh rangkaian menyajikan berita inovasi yang menghibur—mulai dari menyaring fakta aktual dengan 5W+1H, membedah struktur piramida terbalik, hingga memproduksi vlog berita yang edukatif. Teruslah menjadi generasi muda yang melek literasi dan kreatif!
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                        <button onclick="navigateTo('sub5')" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button onclick="markComplete('sub6', 'cover')" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold flex items-center gap-2 shadow-md transition">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Selesaikan Bab 2</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer Portal -->
+    <footer class="bg-navy-950 text-slate-400 text-xs py-8 mt-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2.5">
+                <span class="font-extrabold text-white text-sm">JURNAL<span class="text-crimson-500">XI</span></span>
+                <span>•</span>
+                <span>E-Book Interaktif Bahasa Indonesia SMA Kelas XI (Bab 2)</span>
+            </div>
+            <p class="text-center sm:text-right">Dirancang untuk Pembelajaran Mandiri, Kritis, dan Kreatif.</p>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- JAVASCRIPT INTERAKTIF & LOGIKA APLIKASI -->
+    <!-- ===================================================================== -->
+    <script>
+        // State Aplikasi
+        const completedSections = new Set();
+        let currentSection = 'cover';
+
+        // Data Kuis Evaluasi Bab 2
+        const quizQuestions = [
+            {
+                q: "1. Perhatikan pernyataan berikut: 'Prototipe alat penjernih air karya siswa SMAN 2 mampu menyaring 20 liter air keruh dalam waktu 15 menit.' Pernyataan tersebut termasuk informasi fakta karena...",
+                options: [
+                    "Berisi harapan agar alat tersebut segera diproduksi secara massal",
+                    "Memuat data terukur yang objektif dan dapat dibuktikan kebenarannya",
+                    "Menggunakan kata sifat yang memuji kehebatan para siswa",
+                    "Merupakan pendapat pribadi penulis artikel berita"
+                ],
+                answer: 1,
+                explanation: "Tepat! Informasi fakta bersifat objektif dan didukung data empiris/terukur (20 liter air dalam 15 menit)."
+            },
+            {
+                q: "2. Dalam struktur teks berita berbentuk piramida terbalik, bagian yang memuat rangkuman inti peristiwa (Apa, Siapa, Kapan, Di mana) pada paragraf pertama disebut...",
+                options: [
+                    "Judul berita (Headline)",
+                    "Ekor berita (Tail)",
+                    "Teras berita (Lead)",
+                    "Tubuh berita (Body)"
+                ],
+                answer: 2,
+                explanation: "Benar! Teras berita (lead) berada di paragraf awal dan menyajikan sari pati 5W+1H paling penting."
+            },
+            {
+                q: "3. Manakah di bawah ini yang merupakan contoh kalimat tidak langsung dengan kata kerja pewarta yang tepat?",
+                options: [
+                    "'Kami merakit sensor banjir ini menggunakan barang bekas,' ujar Dika.",
+                    "Dika menjelaskan bahwa timnya merakit sensor banjir tersebut menggunakan komponen daur ulang.",
+                    "Wah, hebat sekali alat pendeteksi banjir buatan siswa SMA itu!",
+                    "Sensor banjir tersebut dipasang di jembatan sungai kemarin sore."
+                ],
+                answer: 1,
+                explanation: "Benar! Kalimat tidak langsung tidak menggunakan tanda petik dan memakai kata penghubung 'bahwa' setelah kata kerja pewarta 'menjelaskan'."
+            },
+            {
+                q: "4. Saat membawakan vlog berita inovasi di depan kamera, hal utama yang membedakannya dengan pembaca berita televisi formal adalah...",
+                options: [
+                    "Boleh menyampaikan data bohong asalkan penonton terhibur",
+                    "Tidak perlu menyusun naskah dan unsur 5W+1H",
+                    "Gaya penyampaian lebih komunikatif, ekspresif, dan interaktif menyapa penonton",
+                    "Selalu membacakan teks secara datar tanpa perubahan intonasi"
+                ],
+                answer: 2,
+                explanation: "Tepat! Vlog berita tetap memegang akurasi fakta 5W+1H, namun dibawakan dengan gaya yang lebih personal, hangat, dan komunikatif."
+            },
+            {
+                q: "5. Urutan tahapan perencanaan proyek vlog berita yang paling logis sebelum melakukan pengambilan gambar (syuting) adalah...",
+                options: [
+                    "Editing video → Menentukan topik → Membuat storyboard",
+                    "Menentukan topik → Riset 5W+1H → Menyusun naskah → Membuat storyboard",
+                    "Publikasi vlog → Wawancara narasumber → Menulis naskah",
+                    "Membuat storyboard → Menentukan topik → Mencari narasumber"
+                ],
+                answer: 1,
+                explanation: "Sempurna! Tahap pra-produksi dimulai dari pemilihan topik, pengumpulan fakta 5W+1H, penulisan naskah, lalu pembuatan storyboard."
+            }
+        ];
+
+        // Fungsi Notifikasi Toast (Pengganti alert)
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let colors = 'bg-navy-900 text-white border-navy-700';
+            let icon = 'fa-circle-info text-amber-400';
+            if (type === 'success') {
+                colors = 'bg-emerald-900 text-white border-emerald-700';
+                icon = 'fa-circle-check text-emerald-300';
+            } else if (type === 'warning') {
+                colors = 'bg-crimson-700 text-white border-crimson-500';
+                icon = 'fa-triangle-exclamation text-amber-300';
+            }
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl border shadow-xl text-xs sm:text-sm font-medium transition-all duration-300 transform translate-y-2 opacity-0 ${colors}`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-base shrink-0"></i><span>${message}</span>`;
+            
+            container.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3200);
+        }
+
+        // Toggle Sidebar Mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Navigasi Antar Bagian / Subbab
+        function navigateTo(targetId) {
+            currentSection = targetId;
+            
+            // Sembunyikan semua section
+            document.querySelectorAll('.content-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+
+            // Tampilkan section tujuan
+            const targetEl = document.getElementById(`section-${targetId}`);
+            if (targetEl) {
+                targetEl.classList.remove('hidden');
+            }
+
+            // Update styling tombol Daftar Isi
+            document.querySelectorAll('.toc-btn').forEach(btn => {
+                if (btn.dataset.target === targetId) {
+                    btn.classList.remove('text-slate-700', 'hover:bg-slate-100', 'font-medium');
+                    btn.classList.add('bg-navy-900', 'text-white', 'font-semibold');
+                } else {
+                    btn.classList.remove('bg-navy-900', 'text-white', 'font-semibold');
+                    btn.classList.add('text-slate-700', 'hover:bg-slate-100', 'font-medium');
+                }
+            });
+
+            // Tutup sidebar jika di layar mobile
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar.classList.contains('-translate-x-full') && window.innerWidth < 1024) {
+                toggleSidebar();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Tandai Subbab Selesai & Update Progress Belajar
+        function markComplete(subId, nextId) {
+            completedSections.add(subId);
+            
+            // Update ikon centang di Daftar Isi
+            const checkIcon = document.getElementById(`check-${subId}`);
+            if (checkIcon) {
+                checkIcon.className = 'fa-solid fa-circle-check text-emerald-500 text-sm shrink-0';
+            }
+
+            // Hitung persentase progres (total 6 subbab)
+            const total = 6;
+            const count = completedSections.size;
+            const pct = Math.round((count / total) * 100);
+
+            document.getElementById('progress-text').textContent = `${pct}% (${count}/${total} Bab)`;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+            document.getElementById('progress-bar-mobile').style.width = `${pct}%`;
+
+            if (count === total) {
+                showToast('Luar biasa! Kamu telah menyelesaikan seluruh Bab 2 (100%)!', 'success');
+            } else {
+                showToast(`Bagian selesai! Progres belajarmu sekarang ${pct}%.`, 'success');
+            }
+
+            if (nextId) {
+                navigateTo(nextId);
+            }
+        }
+
+        // Aktivitas 1: Cek Jawaban 5W+1H
+        function check5W1H(selectEl, correctVal, feedbackId) {
+            const fb = document.getElementById(feedbackId);
+            const val = selectEl.value;
+            fb.classList.remove('hidden');
+
+            if (!val) {
+                fb.classList.add('hidden');
+                return;
+            }
+
+            if (val === correctVal) {
+                fb.className = 'text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 block';
+                fb.innerHTML = `<i class="fa-solid fa-check mr-1.5"></i>Benar! Frasa yang dicetak tebal menunjukkan unsur <strong>${correctVal}</strong>.`;
+            } else {
+                fb.className = 'text-xs font-semibold px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 block';
+                fb.innerHTML = `<i class="fa-solid fa-xmark mr-1.5"></i>Kurang tepat. Coba perhatikan kembali kata kunci yang dicetak tebal!`;
+            }
+        }
+
+        // Aktivitas 2: Mencocokkan Struktur Berita
+        function checkStructureMatch() {
+            const answers = {
+                'match-1': 'ekor',
+                'match-2': 'judul',
+                'match-3': 'teras',
+                'match-4': 'tubuh'
+            };
+
+            let correctCount = 0;
+            let answeredAll = true;
+
+            for (const [id, correct] of Object.entries(answers)) {
+                const el = document.getElementById(id);
+                if (!el.value) answeredAll = false;
+                if (el.value === correct) {
+                    correctCount++;
+                    el.classList.remove('border-rose-500');
+                    el.classList.add('border-emerald-400');
+                } else {
+                    el.classList.remove('border-emerald-400');
+                    el.classList.add('border-rose-500');
+                }
+            }
+
+            const fb = document.getElementById('match-feedback');
+            fb.classList.remove('hidden');
+
+            if (!answeredAll) {
+                fb.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40';
+                fb.textContent = 'Silakan pilih struktur untuk keempat potongan paragraf terlebih dahulu!';
+                return;
+            }
+
+            if (correctCount === 4) {
+                fb.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+                fb.innerHTML = '<i class="fa-solid fa-trophy mr-1.5"></i>Sempurna (4/4 Benar)! Kamu sudah menguasai anatomi Piramida Terbalik dengan sangat baik.';
+            } else {
+                fb.className = 'p-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/40';
+                fb.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-1.5"></i>Kamu menjawab ${correctCount} dari 4 dengan benar. Periksa kembali kotak yang bergaris merah!`;
+            }
+        }
+
+        // Simulasi Adegan Vlog Berita (Subbab 3)
+        function playVlogScene(sceneNum) {
+            const display = document.getElementById('vlog-screen-display');
+            const scenes = {
+                1: {
+                    badge: 'ADEGAN 1 • HOOK & OPENING (00:00 - 00:25)',
+                    icon: 'fa-bolt text-amber-400',
+                    shot: 'KAMERA: Medium Shot | MUSIK: Upbeat Lo-Fi Ceria',
+                    quote: '"Halo Sobat Inovasi! Pernah nggak sih baterai HP kalian sekarat pas lagi jalan pulang sekolah? Nah, sepatu karya siswa SMK ini bisa ngecas HP cuma modal langkah kaki!"'
+                },
+                2: {
+                    badge: 'ADEGAN 2 • DEMONSTRASI ALAT (00:25 - 00:55)',
+                    icon: 'fa-microchip text-blue-400',
+                    shot: 'KAMERA: Extreme Close-Up Sol Sepatu | TEKS GRAFIS: Sensor Piezoelektrik',
+                    quote: '"Di dalam sol sepatu StepVolt ini tertanam kepingan piezoelektrik. Setiap pijakan kaki menghasilkan tekanan mekanik yang langsung diubah menjadi arus listrik 5 Volt!"'
+                },
+                3: {
+                    badge: 'ADEGAN 3 • WAWANCARA INOVATOR (00:55 - 01:15)',
+                    icon: 'fa-microphone text-crimson-400',
+                    shot: 'KAMERA: Two-Shot Reporter & Penemu | AUDIO: Clip-On Mic',
+                    quote: 'Narasumber: "Kami berharap inovasi sederhana ini bisa membantu pendaki gunung atau pelajar di daerah minim listrik agar tetap terhubung."'
+                },
+                4: {
+                    badge: 'ADEGAN 4 • CLOSING & CTA (01:15 - 01:30)',
+                    icon: 'fa-hands-clapping text-emerald-400',
+                    shot: 'KAMERA: Medium Shot + Animasi Subscribe/Komentar',
+                    quote: '"Keren banget kan? Yuk dukung terus karya kreatif pelajar Indonesia! Tulis ide inovasi impianmu di kolom komentar. Sampai jumpa di liputan berikutnya!"'
+                }
+            };
+
+            const s = scenes[sceneNum];
+            display.innerHTML = `
+                <span class="px-3 py-1 rounded-full bg-crimson-600 text-white text-[11px] font-bold tracking-wider">${s.badge}</span>
+                <div class="text-2xl mt-1"><i class="fa-solid ${s.icon}"></i></div>
+                <p class="text-xs font-mono text-amber-300">${s.shot}</p>
+                <p class="text-sm sm:text-base text-white italic font-serif max-w-xl leading-relaxed">${s.quote}</p>
+            `;
+        }
+
+        // Update Checklist Proyek (Subbab 4)
+        function updateChecklist() {
+            const checks = document.querySelectorAll('.vlog-check');
+            let checked = 0;
+            checks.forEach(c => { if (c.checked) checked++; });
+            document.getElementById('checklist-counter').textContent = `${checked} / ${checks.length} Siap`;
+        }
+
+        // Jurnal Membaca (Subbab 5)
+        function saveJournalEntry() {
+            const judul = document.getElementById('jm-judul').value.trim();
+            const sumber = document.getElementById('jm-sumber').value.trim();
+            const tanggal = document.getElementById('jm-tanggal').value;
+            const penting = document.getElementById('jm-penting').value.trim();
+            const fakta = document.getElementById('jm-fakta').value.trim();
+            const halbaru = document.getElementById('jm-halbaru').value.trim();
+            const pendapat = document.getElementById('jm-pendapat').value.trim();
+
+            if (!judul || !sumber || !penting) {
+                showToast('Mohon lengkapi minimal Judul, Sumber Berita, dan Informasi Penting!', 'warning');
+                return;
+            }
+
+            const wrapper = document.getElementById('saved-journals-wrapper');
+            const list = document.getElementById('saved-journals-list');
+            wrapper.classList.remove('hidden');
+
+            const card = document.createElement('div');
+            card.className = 'p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm space-y-1.5';
+            card.innerHTML = `
+                <div class="flex items-center justify-between gap-2">
+                    <span class="font-bold text-navy-900 text-base">${judul}</span>
+                    <span class="text-xs bg-blue-100 text-navy-800 px-2.5 py-0.5 rounded-full font-semibold">${tanggal || 'Tanggal tidak diisi'}</span>
+                </div>
+                <p class="text-xs text-slate-500 font-medium">Sumber: ${sumber}</p>
+                <p class="text-slate-700 pt-1"><strong>Inti Berita:</strong> ${penting}</p>
+                ${fakta ? `<p class="text-slate-700"><strong>Fakta Menarik:</strong> ${fakta}</p>` : ''}
+                ${halbaru ? `<p class="text-slate-700"><strong>Hal Baru:</strong> ${halbaru}</p>` : ''}
+                ${pendapat ? `<p class="text-slate-700"><strong>Pendapat Siswa:</strong> ${pendapat}</p>` : ''}
+            `;
+            list.prepend(card);
+            showToast('Catatan jurnal membaca berhasil disimpan!', 'success');
+        }
+
+        function copyTextFallback(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Teks berhasil disalin ke clipboard!', 'success');
+            } catch (err) {
+                showToast('Gagal menyalin teks.', 'warning');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function copyJournalText() {
+            const judul = document.getElementById('jm-judul').value.trim() || '-';
+            const sumber = document.getElementById('jm-sumber').value.trim() || '-';
+            const tanggal = document.getElementById('jm-tanggal').value || '-';
+            const penting = document.getElementById('jm-penting').value.trim() || '-';
+            const fakta = document.getElementById('jm-fakta').value.trim() || '-';
+            const halbaru = document.getElementById('jm-halbaru').value.trim() || '-';
+            const pendapat = document.getElementById('jm-pendapat').value.trim() || '-';
+
+            const formatted = `JURNAL MEMBACA BERITA INOVASI (BAHASA INDONESIA KELAS XI)\n` +
+                `1. Judul Berita: ${judul}\n` +
+                `2. Penulis/Sumber: ${sumber}\n` +
+                `3. Tanggal Publikasi: ${tanggal}\n` +
+                `4. Informasi Penting: ${penting}\n` +
+                `5. Fakta Menarik: ${fakta}\n` +
+                `6. Hal Baru Dipelajari: ${halbaru}\n` +
+                `7. Pendapat Siswa: ${pendapat}`;
+
+            copyTextFallback(formatted);
+        }
+
+        function copyReflection() {
+            const r1 = document.getElementById('ref-1').value.trim() || '-';
+            const r2 = document.getElementById('ref-2').value.trim() || '-';
+            const r3 = document.getElementById('ref-3').value.trim() || '-';
+            const r4 = document.getElementById('ref-4').value.trim() || '-';
+            const r5 = document.getElementById('ref-5').value.trim() || '-';
+
+            const formatted = `REFLEKSI PEMBELAJARAN BAB 2 - MENYAJIKAN BERITA INOVASI\n` +
+                `1. Pengetahuan baru: ${r1}\n` +
+                `2. Cara membedakan berita aktual & akurat: ${r2}\n` +
+                `3. Kesulitan memahami struktur berita: ${r3}\n` +
+                `4. Pengalaman membuat vlog: ${r4}\n` +
+                `5. Penerapan dalam kehidupan sehari-hari: ${r5}`;
+
+            copyTextFallback(formatted);
+        }
+
+        // Render & Evaluasi Kuis Akhir (Subbab 6)
+        function renderFinalQuiz() {
+            const container = document.getElementById('final-quiz-container');
+            container.innerHTML = quizQuestions.map((item, idx) => `
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3" id="q-card-${idx}">
+                    <p class="font-bold text-navy-900 text-sm sm:text-base">${item.q}</p>
+                    <div class="space-y-2">
+                        ${item.options.map((opt, optIdx) => `
+                            <label class="flex items-start gap-3 p-3 rounded-xl bg-white border border-slate-200 hover:border-navy-800 cursor-pointer transition text-xs sm:text-sm">
+                                <input type="radio" name="quiz-q-${idx}" value="${optIdx}" class="mt-0.5 accent-navy-900">
+                                <span class="text-slate-700">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="q-feedback-${idx}" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium"></div>
+                </div>
+            `).join('');
+        }
+
+        function submitFinalQuiz() {
+            let score = 0;
+            let unanswered = 0;
+
+            quizQuestions.forEach((item, idx) => {
+                const selected = document.querySelector(`input[name="quiz-q-${idx}"]:checked`);
+                const fb = document.getElementById(`q-feedback-${idx}`);
+                fb.classList.remove('hidden');
+
+                if (!selected) {
+                    unanswered++;
+                    fb.className = 'p-3 rounded-xl text-xs sm:text-sm font-medium bg-amber-100 text-amber-900 border border-amber-300';
+                    fb.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-1.5"></i>Kamu belum memilih jawaban untuk soal ini.`;
+                    return;
+                }
+
+                const val = parseInt(selected.value, 10);
+                if (val === item.answer) {
+                    score += 20;
+                    fb.className = 'p-3 rounded-xl text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-900 border border-emerald-300';
+                    fb.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5 text-emerald-700"></i>${item.explanation}`;
+                } else {
+                    fb.className = 'p-3 rounded-xl text-xs sm:text-sm font-medium bg-rose-100 text-rose-900 border border-rose-300';
+                    fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1.5 text-rose-700"></i>Kurang tepat. Jawaban yang benar: <strong>${item.options[item.answer]}</strong>. ${item.explanation}`;
+                }
+            });
+
+            const badge = document.getElementById('quiz-score-badge');
+            badge.classList.remove('hidden');
+            badge.textContent = `Skor Akhir: ${score} / 100`;
+
+            if (unanswered > 0) {
+                showToast(`Masih ada ${unanswered} soal yang belum dijawab!`, 'warning');
+            } else {
+                showToast(`Kuis selesai diperiksa! Nilai kamu: ${score}/100`, score >= 80 ? 'success' : 'info');
+            }
+        }
+
+        function resetFinalQuiz() {
+            renderFinalQuiz();
+            document.getElementById('quiz-score-badge').classList.add('hidden');
+            showToast('Kuis telah diatur ulang. Silakan kerjakan kembali!', 'info');
+        }
+
+        // Inisialisasi saat halaman dimuat
+        window.onload = function() {
+            renderFinalQuiz();
+        };
+    </script>
+</body>
+</html>
